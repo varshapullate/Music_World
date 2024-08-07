@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-pop</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111010;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #111010;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 4px 6px rgba(49, 48, 48, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            color: #74a5d3;
+            text-decoration: none;
+        }
+
+        .search-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-label {
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            position: relative;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            width: 50%;
+            max-width: 400px;
+            overflow: hidden;
+            background: #393737;
+            padding: 9px;
+            cursor: text;
+        }
+
+        .search-label:hover {
+            border-color: gray;
+        }
+
+        .search-label:focus-within {
+            background: #464646;
+            border-color: gray;
+        }
+
+        .search-label input {
+            outline: none;
+            width: 100%;
+            border: none;
+            background: none;
+            color: rgb(162, 162, 162);
+        }
+
+        .search-label input::placeholder {
+            color: #a2a2a2;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            margin-right: 8%;
+        }
+
+        .profile-button {
+            background: #00bf63;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            margin-right: 8%;
+            top: 50px;
+            right: 0;
+            background-color: #eee;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            padding: 2px;
+            border-radius: 4px;
+        }
+        .profile:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content button {
+            background: none;
+            border: none;
+            color: #333;
+            padding: 8px 12px;
+            text-align: left;
+            cursor: pointer;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #00bf63;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 80px 5%;
+        }
+
+        .info {
+            color: white;
+            margin-right: 20px;
+            width: 20%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .info img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .playlist-container {
+            flex: 1;
+            background: #111010;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .playlist-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: wheat;
+        }
+
+        .playlist-table thead tr{
+            display: flex;
+            background: #00bf63;
+            padding: 10px;
+            background-color: transparent;
+            font-weight: bold;
+        }
+
+        .playlist-table tbody {
+            background: #111010;
+        }
+
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .playlist-item:hover {
+            background-color: #333333;
+        }
+
+        .playlist-item td {
+            padding: 5px 10px;
+        }
+
+        .playlist-item td a.artist {
+            font-size: 0.9em;
+            color: #a9a9a9;
+            text-align: center;
+        }
+
+        .playlist-item td a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #a9a9a9;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home" class="logo">One<span style="color:rgb(173, 137, 205)">Stop</span></a>
+        <div class="search-container">
+            <label class="search-label">
+                <input type="text" name="text" class="input" required="" placeholder="Search...">
+            </label>
+        </div>
+        <div class="profile">
+            <button class="profile-button">
+                <svg viewBox="0 0 24 24" fill="white" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2c2.757 0 5 2.243 5 5.001 0 2.756-2.243 5-5 5s-5-2.244-5-5c0-2.758 2.243-5.001 5-5.001zm0-2c-3.866 0-7 3.134-7 7.001 0 3.865 3.134 7 7 7s7-3.135 7-7c0-3.867-3.134-7.001-7-7.001zm6.369 13.353c-.497.498-1.057.931-1.658 1.302 2.872 1.874 4.378 5.083 4.972 7.346h-19.387c.572-2.29 2.058-5.503 4.973-7.358-.603-.374-1.162-.811-1.658-1.312-4.258 3.072-5.611 8.506-5.611 10.669h24c0-2.142-1.44-7.557-5.631-10.647z"/>
+                </svg>
+            </button>
+            <div class="dropdown-content">
+                <button>Log In</button>
+                <button>Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="info">
+            <img src="rihanna.png" alt="Rihanna">
+            <h1>Robyn Rihanna Fenty</h1>
+            <p>Anti is the eighth studio album by Barbadian singer Rihanna. 
+                It was released on 28 January 2016 by Roc Nation and Westbury Road.
+                Rihanna started recording in 2014 after departing from Def Jam Recordings, 
+                who had released all of her albums since her 2005 debut.</p>
+        </div>
+        <div class="playlist-container">
+            <table class="playlist-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th style="margin-left: 3%;">Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="playlist-item">
+                        <td>1</td>
+                        <td>
+                            <a href="consideration.html">Consideration</a><br>
+                            <span class="artist">Rihanna, SZA</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>2</td>
+                        <td>
+                            <a href="">James Joint</a><br>
+                            <span class="artist">Rihanna</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>3</td>
+                        <td>
+                            <a href="">Kiss It Better</a><br>
+                            <span class="artist">Rihanna</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>4</td>
+                        <td>
+                            <a href="">Work</a><br>
+                            <span class="artist">Rihanna, Drake</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>5</td>
+                        <td>
+                            <a href="">Desperado</a><br>
+                            <span class="artist">Rihanna</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>6</td>
+                        <td>
+                            <a href="">Woo</a><br>
+                            <span class="artist">Rihanna</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>7</td>
+                        <td>
+                            <a href="">Needed Me</a><br>
+                            <span class="artist">Rihanna</span>
+                        </td>
+                    </tr>
+                    <tr class="playlist-item">
+                        <td>8</td>
+                        <td>
+                            <a href="">Yeah, I Said It</a><br>
+                            <span class="artist">Rihanna</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
