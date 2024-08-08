@@ -132,7 +132,7 @@
             width: 80%;
         }
 
-        .grid-item {
+        .grid-item,.grid-item-h,.grid-item-i {
             position: relative;
             background-color: #f2f2f2;
             border-radius: 15px;
@@ -150,7 +150,6 @@
         }
 
         .grid-item::before {
-            content: "";
             position: absolute;
             top: 0;
             left: 0;
@@ -160,13 +159,12 @@
             z-index: 1;
         }
 
-        .grid-item a {
+        .grid-item a, .grid-item-i a,.grid-item-h a{
             color: white;
             text-decoration: none;
             position: relative;
             z-index: 2; /* Ensure text is above the overlay */
         }
-
         /* Specific backgrounds for each grid item */
         .grid-item:nth-child(1) {
             background-image: url('pop.png');
@@ -191,11 +189,11 @@
             width: 60%;
         }
 
-        .grid-item.indie {
+        .grid-item-i {
             background-image: url('indie.png');
         }
 
-        .grid-item.hiphop {
+        .grid-item-h {
             background-image: url('hiphop.png');
         }
 
@@ -229,8 +227,8 @@
     </div>
     
     <div class="grid-container-two">
-        <div class="grid-item"><a href="">Indie</a></div>
-        <div class="grid-item"><a href="">Hip-hop</a></div>
+        <div class="grid-item-i"><a href="">Indie</a></div>
+        <div class="grid-item-h"><a href="">Hip-hop</a></div>
     </div>
 </body>
 </html>
